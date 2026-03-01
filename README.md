@@ -35,9 +35,13 @@ VITE_WEATHERSTACK_API_KEY="your_weatherstack_access_key"
    *Optional: If using the proxy backend, run `cd server && npm run dev` separately.*
 
 ### Deployment to Vercel
-1. Ensure the `client` folder is selected as the **Root Directory** in Vercel.
-2. Add your `VITE_WEATHERSTACK_API_KEY` to the **Environment Variables** section.
-3. Vercel will automatically detect Vite and build the project.
+This project is configured for a **Unified Deployment** using the `vercel.json` file in the root directory.
+
+1. **Root Directory**: Ensure the root of the repository (`/`) is selected as the Vercel Root Directory.
+2. **Environment Variables**: Add your `WEATHERSTACK_ACCESS_KEY` to the Vercel Dashboard to enable the backend API proxy.
+3. **Build & Routes**: Vercel will automatically:
+   - Build the React client from the `client/` folder.
+   - Deploy the Node.js API from the `server/current.js` file as a serverless function at `/api/current`.
 
 ## 🛠️ Stack
 - **Frontend**: React + TypeScript + Vite
