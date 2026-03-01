@@ -16,11 +16,23 @@ const CurrentWeather = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get(`http://localhost:4000/api/current?query=${city}`);
+            const apiKey = import.meta.env.VITE_WEATHERSTACK_API_KEY;
+            const baseUrl = apiKey
+                ? `http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}`
+                : `http://localhost:4000/api/current?query=${city}`;
+
+            const response = await axios.get(baseUrl);
+
+            // Handle error response from direct Weatherstack call if applicable
+            if (response.data.error) {
+                throw new Error(response.data.error.info || 'Weatherstack API Error');
+            }
+
             setWeatherData(response.data);
         } catch (err: any) {
             console.error(err);
-            setError(err.response?.data?.error || 'Could not find weather data for that city.');
+            const errorMessage = err.response?.data?.error || err.message || 'Could not find weather data for that city.';
+            setError(errorMessage);
             setWeatherData(null);
         } finally {
             setLoading(false);
