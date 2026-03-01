@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply antialiased text-gray-800 bg-[#fbfbfd] min-h-screen overflow-x-hidden m-0 p-0 transition-colors duration-300;
+        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+}
+
+@layer components {
+    .frosted-glass {
+        @apply backdrop-blur-xl bg-white/70 shadow-2xl shadow-gray-200/50 border border-white/40 rounded-[2.5rem];
+    }
+}
+
+/* Custom Scrollbar for a premium feel */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: auto 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-layout {
+        display: flex;
+        flex-direction: column;
+    }
+}
