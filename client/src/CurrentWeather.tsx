@@ -17,9 +17,14 @@ const CurrentWeather = () => {
         setError(null);
         try {
             const apiKey = import.meta.env.VITE_WEATHERSTACK_API_KEY;
+
+            // In unified production deployment, use relative path to hit the Vercel serverless function
+            // In development, fallback to localhost:4000 proxy
             const baseUrl = apiKey
                 ? `http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}`
-                : `http://localhost:4000/api/current?query=${city}`;
+                : window.location.hostname === 'localhost'
+                    ? `http://localhost:4000/api/current?query=${city}`
+                    : `/api/current?query=${city}`;
 
             const response = await axios.get(baseUrl);
 
