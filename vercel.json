@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "client/**",
-            "use": "@vercel/static-build"
+            "use": "@vercel/static"
         },
         {
             "src": "server/*.js",
@@ -16,7 +16,7 @@
             "dest": "/server/$1.js"
         },
         {
-            "src": "(.*)",
+            "src": "/(.*)",
             "dest": "/client/$1"
         }
     ]
